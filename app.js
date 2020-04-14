@@ -40,7 +40,8 @@ app.getData = function () {
 // Display data on the page
 app.displayInfo = function (data) {
   data.forEach((photo) => {
-    const returnedImage = photo.src.medium;
+    console.log(photo.src);
+    const returnedImage = photo.src.landscape;
     const gallery = `<img class="returnedImage" src="${returnedImage}" alt=""/>`;
     $(".resultGallery").append(gallery);
   });

@@ -1,6 +1,42 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: $mainFont;
+}
+
+main {
+  background-color: oldlace;
+}
+
+header {
+  background-image: url("./assets/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  height: 70vh;
+}
+
+h1 {
+  font-family: $headingFont;
+  font-size: 6rem;
+  text-align: center;
+  padding: 75px 0 50px 0;
+  color: rgb(32, 65, 32);
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 20px 0;
+  line-height: 25px;
+  text-align: center;
+  color: rgb(25, 39, 25);
+}
+
 .wrapper {
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 0px auto;
   width: 80%;
 }
 
@@ -14,6 +50,9 @@
 img {
   max-width: 100%;
   display: block;
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
 }
 .resultGallery {
   display: grid;
@@ -25,4 +64,10 @@ img {
   grid-auto-rows: 150px;
   grid-auto-flow: dense;
   overflow: hidden;
+}
+
+.dropdown {
+  padding: 40px 0;
+  text-align: center;
+  font-size: 1.8rem;
 }

@@ -221,9 +221,45 @@ textarea {
   overflow: hidden;
 }
 
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+main {
+  background-color: oldlace;
+}
+
+header {
+  background-image: url("./assets/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  height: 70vh;
+}
+
+h1 {
+  font-family: "DM Serif Display", serif;
+  font-size: 6rem;
+  text-align: center;
+  padding: 75px 0 50px 0;
+  color: #204120;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 20px 0;
+  line-height: 25px;
+  text-align: center;
+  color: #192719;
+}
+
 .wrapper {
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 0px auto;
   width: 80%;
 }
 
@@ -240,6 +276,10 @@ textarea {
 img {
   max-width: 100%;
   display: block;
+  width: 500px;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .resultGallery {
@@ -259,4 +299,10 @@ img {
   grid-auto-rows: 150px;
   grid-auto-flow: dense;
   overflow: hidden;
+}
+
+.dropdown {
+  padding: 40px 0;
+  text-align: center;
+  font-size: 1.8rem;
 }
