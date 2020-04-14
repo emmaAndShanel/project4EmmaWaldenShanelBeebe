@@ -15,29 +15,44 @@
 
 const app = {};
 
-// Collect user input
-app.collectInfo = function () {};
+// Collect user input and store in a variable
+app.getData = function () {
+  $("select").on("change", (e) => {
+    const userSelection = e.currentTarget.value;
 
-// Make AJAX request with user inputted data
-app.getInfo = function () {
-  $.ajax({
-    url: "https://api.pexels.com/v1/search?query=nature&per_page=15&page=1",
-    method: "GET",
-    dataType: "json",
-    headers: {
-      authorization: "563492ad6f917000010000018090d1171f7a46398e0de7e0ada31b47",
-    },
-  }).then((result) => {
-    console.log(result);
+    // Make AJAX request with user inputted data
+    $.ajax({
+      url: `https://api.pexels.com/v1/search?query=${userSelection}&per_page=15&page=1`,
+      method: "GET",
+      dataType: "json",
+      headers: {
+        authorization:
+          "563492ad6f917000010000018090d1171f7a46398e0de7e0ada31b47",
+      },
+    }).then((result) => {
+      const natureArray = result.photos;
+      $(".resultGallery").empty();
+      app.displayInfo(natureArray);
+    });
   });
 };
 
 // Display data on the page
-app.displayInfo = function () {};
+app.displayInfo = function (data) {
+  data.forEach((photo) => {
+    const returnedImage = photo.src.medium;
+    const gallery = `<img class="returnedImage" src="${returnedImage}" alt=""/>`;
+    $(".resultGallery").append(gallery);
+  });
+};
+
+app.modalImage = function () {};
+
+app.openModal = function () {};
 
 // Start app
 app.init = function () {
-  app.getInfo();
+  app.getData();
 };
 
 $(function () {
