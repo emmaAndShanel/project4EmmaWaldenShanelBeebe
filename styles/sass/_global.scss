@@ -1,8 +1,6 @@
+// Global font styles and sizes
 html {
   font-size: 62.5%;
-}
-
-body {
   font-family: $mainFont;
 }
 
@@ -10,29 +8,35 @@ main {
   background-color: oldlace;
 }
 
-header {
-  background-image: url("./assets/background.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 0;
-  height: 70vh;
-}
-
 h1 {
   font-family: $headingFont;
   font-size: 6rem;
   text-align: center;
   padding: 75px 0 50px 0;
-  color: rgb(32, 65, 32);
+  color: $darkMain;
 }
 
 h2 {
   font-size: 2rem;
-  margin: 20px 0;
+  padding: 20px 0;
   line-height: 25px;
   text-align: center;
-  color: rgb(25, 39, 25);
+  color: $lightMain;
 }
+
+footer {
+  font-size: 1.6rem;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
+}
+
+// Wrappers
 
 .wrapper {
   max-width: 1280px;
@@ -45,29 +49,4 @@ h2 {
   align-items: center;
   justify-items: center;
   margin: 20px;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-  width: 500px;
-  height: 300px;
-  object-fit: cover;
-}
-.resultGallery {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(5, auto);
-  grid-gap: 20px;
-  grid-auto-rows: 150px;
-  grid-auto-flow: dense;
-  overflow: hidden;
-}
-
-.dropdown {
-  padding: 40px 0;
-  text-align: center;
-  font-size: 1.8rem;
 }
