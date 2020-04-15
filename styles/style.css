@@ -314,7 +314,7 @@ select {
           appearance: none;
   border: 1px solid #204120;
   border-radius: 5px;
-  padding: 7px 10px 12px 10px;
+  padding: 7px 35px 12px 10px;
   background-image: url(./assets/arrow.svg);
   background-repeat: no-repeat;
   background-position: 95% center;
@@ -351,7 +351,7 @@ select:hover {
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
   display: -ms-grid;
   display: grid;
   justify-items: center;
@@ -377,6 +377,7 @@ select:hover {
       grid-template-columns: 1fr;
   color: black;
   margin: 3rem;
+  position: relative;
 }
 
 .modalContent img {
@@ -384,6 +385,14 @@ select:hover {
   width: 100%;
   -o-object-fit: contain;
      object-fit: contain;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
 }
 
 .modal.open {
