@@ -23,3 +23,19 @@ header {
   text-align: center;
   font-size: 1.8rem;
 }
+
+// Dropdown menu styling
+select {
+  appearance: none;
+  border: 1px solid $darkMain;
+  border-radius: 5px;
+  padding: 7px 10px 12px 10px;
+  // Arrow by Manaqib S from the Noun Project
+  background-image: url(./assets/arrow.svg);
+  background-repeat: no-repeat;
+  background-position: 95% center;
+}
+
+select:hover {
+  background-color: lighten($lightMain, 80%);
+}
