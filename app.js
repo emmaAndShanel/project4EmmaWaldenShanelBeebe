@@ -32,28 +32,60 @@ app.getData = function () {
     }).then((result) => {
       const natureArray = result.photos;
       $(".resultGallery").empty();
-      app.displayInfo(natureArray);
+      app.displayInfo(natureArray, userSelection);
+      app.modalImage(userSelection);
     });
   });
 };
 
 // Display data on the page
-app.displayInfo = function (data) {
+app.displayInfo = function (data, alt) {
   data.forEach((photo) => {
-    console.log(photo.src);
     const returnedImage = photo.src.landscape;
-    const gallery = `<img class="returnedImage" src="${returnedImage}" alt=""/>`;
+    const gallery = `<img class="returnedImage" src="${returnedImage}" alt="Photo of ${alt}" tabindex="0  "/>`;
     $(".resultGallery").append(gallery);
   });
 };
 
-app.modalImage = function () {};
+app.openModal = () => {
+  $modal.addClass("open");
+  $(window).on("keyup", app.handleKeyUp);
+};
 
-app.openModal = function () {};
+app.closeModal = () => {
+  $modal.removeClass("open");
+};
+
+app.handleClickToClose = (e) => {
+  if (e.target !== e.currentTarget) {
+    app.closeModal();
+  }
+};
+
+app.handleKeyUp = (e) => {
+  if (e.key === "Escape") return app.closeModal();
+};
+
+app.modalImage = (alt) => {
+  $(".returnedImage").on("click", function (e) {
+    $(".modalContent").html(
+      `<img src="${e.currentTarget.src}" alt="Photo of ${alt}"/>`
+    );
+    app.openModal();
+  });
+  $(".returnedImage").on("keyup", function (e) {
+    if (e.key === "Enter") {
+      $(".modalContent").html(`<img src="${e.currentTarget.src}" alt=""/>`);
+      app.openModal();
+    }
+  });
+};
 
 // Start app
 app.init = function () {
+  $modal = $(".modal");
   app.getData();
+  $modal.on("click", app.handleClickToClose);
 };
 
 $(function () {
