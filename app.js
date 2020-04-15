@@ -31,18 +31,30 @@ app.getData = function () {
       },
     }).then((result) => {
       const natureArray = result.photos;
+
+      const urls = natureArray.map((data) => data.url);
+
+      urls.forEach((entry, index) => {
+        const urlDetails = /^(https:\/\/www.pexels.com\/photo\/)([2a-z-]+)([0-9/]+)/;
+        const urlArray = entry.match(urlDetails);
+
+        const urlDescription = urlArray[2];
+        const urlDescriptionSpaced = urlDescription.replace(/-/g, " ");
+        natureArray[index].altText = urlDescriptionSpaced;
+      });
+
       $(".resultGallery").empty();
-      app.displayInfo(natureArray, userSelection);
-      app.modalImage(userSelection);
+      app.displayInfo(natureArray);
+      app.modalImage();
     });
   });
 };
 
 // Display data on the page
-app.displayInfo = function (data, alt) {
+app.displayInfo = function (data) {
   data.forEach((photo) => {
     const returnedImage = photo.src.landscape;
-    const gallery = `<img class="returnedImage" src="${returnedImage}" alt="Photo of ${alt}" tabindex="0  "/>`;
+    const gallery = `<img class="returnedImage" src="${returnedImage}" alt="${photo.altText}" tabindex="0  "/>`;
     $(".resultGallery").append(gallery);
   });
 };
@@ -66,10 +78,10 @@ app.handleKeyUp = (e) => {
   if (e.key === "Escape") return app.closeModal();
 };
 
-app.modalImage = (alt) => {
+app.modalImage = () => {
   $(".returnedImage").on("click", function (e) {
     $(".modalContent").html(
-      `<img src="${e.currentTarget.src}" alt="Photo of ${alt}"/>`
+      `<img src="${e.currentTarget.src}" alt="${e.currentTarget.alt}"/>`
     );
     app.openModal();
   });
