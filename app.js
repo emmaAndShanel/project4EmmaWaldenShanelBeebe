@@ -1,19 +1,16 @@
-// An app that generates nature images for users based on their selection from a dropdown of options
-// A landing page with title and message about how to use the app
-// A dropdown menu with nature search terms
-// A background where the images will be displayed below the dropdown
-// Create app namespace to hold all methods
-// Add event listener to collect the user input from the dropdown
-// Save user input in a variable
-// Use that variable to make AJAX request
-// Display related images on the page in a gallery
-// When user clicks on an image it scales up in size (modal)
-
-// Stretch goals
-// Create a carousel on the modal of the images that users can click through
-// Add soothing nature sounds
-
 const app = {};
+
+app.soundObject = {
+  autumn: '/styles/assets/sounds/autumn.mp3',
+  blossoms: '/styles/assets/sounds/blossoms.mp3',
+  canyon: '/styles/assets/sounds/canyon.mp3',
+  forest: '/styles/assets/sounds/forest.mp3',
+  lights: '/styles/assets/sounds/lights.mp3',
+  rainforest: '/styles/assets/sounds/rainforest.mp3',
+  sky: '/styles/assets/sounds/sky.mp3',
+  stream: '/styles/assets/sounds/stream.mp3',
+  waves: '/styles/assets/sounds/waves.mp3',
+}
 
 // Collect user input and store in a variable
 app.getData = function () {
@@ -62,6 +59,23 @@ app.displayInfo = function (data) {
   });
 };
 
+
+app.getSound = function () {
+  $("option").on("click", function (e) {
+    const userId = $(this).attr('id');
+  for (let sound in app.soundObject) {
+    const soundFile = app.soundObject[sound];
+    if (userId === sound) {
+      $('audio').html(`<source src="${soundFile}"><source>`);
+      const audio = $('audio')
+      audio[0].play();
+      $('audio').prop('volume', 0.1)
+    }
+  }
+})
+}
+
+
 // Start of the modal functionality
 // Adding class to modal so that it appears on the page
 app.openModal = () => {
@@ -90,30 +104,25 @@ app.handleKeyUp = (e) => {
 app.modalImage = () => {
   $(".returnedImage").on("click", function (e) {
     $(".modalContent").html(
-      `<img src="${e.currentTarget.src}" alt="${e.currentTarget.alt}"/>
-      <span class="close"><img src="./styles/assets/close.svg"/></span>`
+        `<figure><img src="${e.currentTarget.src}" alt="${e.currentTarget.alt}"/>
+        <span class="close"><img src="./styles/assets/close.svg"/></span></figure>`
     );
     app.openModal();
   });
   // Allows user to use enter to open the modal
   $(".returnedImage").on("keyup", function (e) {
     if (e.key === "Enter") {
-      $(".modalContent").html(`<img src="${e.currentTarget.src}" alt=""/>`);
+      $(".modalContent").html(`<img src="${e.currentTarget.src}" alt="${e.currentTarget.alt}"/>
+      <span class="close"><img src="./styles/assets/close.svg"/></span>`);
       app.openModal();
     }
   });
 };
 
-// Start app
-app.init = function () {
-  $modal = $(".modal");
-  app.getData();
-  $modal.on("click", app.handleClickToClose);
-};
-
 // Waiting for document to be ready to initialize
 // Start app
 app.init = function () {
+  app.getSound();
   $modal = $(".modal");
   app.getData();
   $modal.on("click", app.handleClickToClose);

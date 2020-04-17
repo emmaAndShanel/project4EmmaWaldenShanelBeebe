@@ -5,11 +5,27 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
     .resultGallery {
         grid-template-columns: repeat(1, 1fr);
         grid-gap: 30px;
         grid-template-rows: repeat(15, auto);
+    }
+}
+
+@media (max-width: 660px) {
+    header {
+        background-position: right;
+    }
+
+    h1 {
+        padding-top: 60px;
+    }
+}
+
+@media (max-width: 340px) {
+    h1 {
+        padding-top: 40px;
     }
 }
 
