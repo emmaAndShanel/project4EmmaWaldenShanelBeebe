@@ -260,6 +260,18 @@ img {
      object-fit: cover;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+a:hover, a:focus {
+  color: green;
+  text-decoration: underline;
+}
+
 .wrapper {
   max-width: 1280px;
   margin: 0px auto;
@@ -301,12 +313,21 @@ header {
   grid-auto-rows: 150px;
   grid-auto-flow: dense;
   overflow: hidden;
-  padding: 0 20px 40px 20px;
+  padding: 20px 40px 60px 40px;
 }
 
 .returnedImage {
   -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.returnedImage:hover, .returnedImage:focus {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+          box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
 .dropdown {

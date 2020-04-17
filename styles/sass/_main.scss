@@ -16,12 +16,18 @@ header {
   grid-auto-rows: 150px;
   grid-auto-flow: dense;
   overflow: hidden;
-  padding: 0 20px 40px 20px;
+  padding: 20px 40px 60px 40px;
 }
 
 .returnedImage {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-} 
+  transition: all 0.3s;
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  }
+}
 
 .dropdown {
   padding: 30px 0;
