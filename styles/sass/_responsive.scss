@@ -29,4 +29,8 @@
     }
 }
 
-
+@media (max-height: 700px) {
+    .modalContent img {
+        max-height: 100%;
+    }
+}
