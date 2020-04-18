@@ -6,6 +6,18 @@ header {
   height: 70vh;
 }
 
+button {
+  background: transparent;
+  border: none;
+  margin-top: 30px;
+}
+
+.soundOff {
+  width: 30px;
+  height: 30px;
+  color: $darkMain;
+}
+
 .resultGallery {
   display: grid;
   justify-content: center;
@@ -16,7 +28,7 @@ header {
   grid-auto-rows: 150px;
   grid-auto-flow: dense;
   overflow: hidden;
-  padding: 20px 40px 60px 40px;
+  padding: 50px 50px 60px 50px;
 }
 
 .returnedImage {
@@ -30,7 +42,7 @@ header {
 }
 
 .dropdown {
-  padding: 30px 0;
+  padding-top: 30px;
   text-align: center;
   font-size: 1.8rem;
 }

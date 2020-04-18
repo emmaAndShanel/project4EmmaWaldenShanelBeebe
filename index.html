@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Emma and Shanels Awesome Project</title>
+    <title>A Moment in Nature</title>
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans:ital@0;1&display=swap"
       rel="stylesheet"
     />
+    <link type="image/png" href="./styles/assets/leaf.png" rel="icon" />
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
@@ -19,13 +20,14 @@
     </header>
     <!-- Start of the main -->
     <main>
-      <!-- The nature dropdown -->
       <div class="wrapper">
-        <audio></audio>
+        <!-- Audio files get populated here -->
+        <div class="audio"></div>
         <h2>
           Transport yourself from your home into nature by choosing an option
           from the dropdown below
         </h2>
+        <!-- The nature dropdown -->
         <div class="dropdown">
           <label for="nature" class="visuallyHidden">Choose an option</label>
           <select id="nature">
@@ -37,12 +39,13 @@
             <option id="waves" value="Ocean">Ocean Waves</option>
             <option id="stream" value="Stream">Soothing Streams</option>
             <option id="blossoms" value="Spring Blossoms"
-              >Spring Blossoms</option
+            >Spring Blossoms</option
             >
             <option id="sky" value="Sky">Stunning Skies</option>
             <option id="canyon" value="Canyon">Vast Canyons</option>
             <option id="rainforest" value="Jungle">Wild Jungle</option>
           </select>
+          <div class="soundButton"></div>
         </div>
         <div class="resultGallery">
           <!-- Images are generated here -->

@@ -275,7 +275,7 @@ a:hover, a:focus {
 .wrapper {
   max-width: 1280px;
   margin: 0px auto;
-  width: 80%;
+  width: 95%;
 }
 
 .footerWrapper {
@@ -296,6 +296,17 @@ header {
   height: 70vh;
 }
 
+button {
+  background: transparent;
+  border: none;
+  margin-top: 30px;
+}
+
+.soundOff {
+  width: 30px;
+  height: 30px;
+}
+
 .resultGallery {
   display: -ms-grid;
   display: grid;
@@ -313,7 +324,7 @@ header {
   grid-auto-rows: 150px;
   grid-auto-flow: dense;
   overflow: hidden;
-  padding: 20px 40px 60px 40px;
+  padding: 50px 50px 60px 50px;
 }
 
 .returnedImage {
@@ -331,7 +342,7 @@ header {
 }
 
 .dropdown {
-  padding: 30px 0;
+  padding-top: 30px;
   text-align: center;
   font-size: 1.8rem;
 }
@@ -386,6 +397,12 @@ select:hover {
   }
 }
 
+@media (max-height: 700px) {
+  .modalContent img {
+    max-height: 100%;
+  }
+}
+
 .modal {
   opacity: 0;
   position: fixed;
@@ -424,6 +441,7 @@ select:hover {
 
 figure {
   position: relative;
+  overflow: scroll;
 }
 
 .modalContent img {
