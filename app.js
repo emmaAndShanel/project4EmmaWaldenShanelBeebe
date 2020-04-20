@@ -1,5 +1,7 @@
+//namspace object
 const app = {};
 
+// object containing audio elements
 app.soundObject = {};
 
 app.soundObject.autumn = new Audio("styles/assets/sounds/autumn.mp3");
@@ -21,7 +23,9 @@ app.soundObject.stream.loop = true;
 app.soundObject.waves = new Audio("styles/assets/sounds/waves.mp3");
 app.soundObject.waves.loop = true;
 
+// soundMuted begins as false because sound automatically plays when user makes first option selection
 app.isSoundMuted = false;
+
 // Collect user input and store in a variable
 app.getData = function () {
   $("select").on("change", (e) => {
@@ -37,31 +41,36 @@ app.getData = function () {
           "563492ad6f917000010000018090d1171f7a46398e0de7e0ada31b47",
       },
     }).then((result) => {
-      // Getting an array of image objects
+      // Gets an array of image objects
       const natureArray = result.photos;
-      // Creating an array of image urls
-      const urls = natureArray.map((data) => data.url);
 
-      // Looping over the urls extracts the image description
+      // Creates an array of image urls
+      const urls = natureArray.map((data) => data.url);
+      // Loops over the urls
       urls.forEach((entry, index) => {
+        // extracts the image description from the url
         const urlDetails = /^(https:\/\/www.pexels.com\/photo\/)([a-z-]+)([0-9/]+)/;
         const urlArray = entry.match(urlDetails);
         const urlDescription = urlArray[2];
+        // removes dashes from between words in image description
         const urlDescriptionSpaced = urlDescription.replace(/-/g, " ");
+        // adds altText property with the image description to natureArray
         natureArray[index].altText = urlDescriptionSpaced;
       });
 
-      // Emptys the gallery each time the user selects a new option
+      // Empties the gallery each time the user selects a new option
       $(".resultGallery").empty();
+      // Displays the images in a gallery on the page
       app.displayInfo(natureArray);
+      // Modal pop up function
       app.modalImage();
     });
   });
 };
 
-// Display data on the page
+// Display data(images) on the page
 app.displayInfo = function (data) {
-  // Loop through the array of photos and returns image to be displayed on the page with alt text
+  // Loops through the array of photos and returns image to be displayed on the page with alt text
   data.forEach((photo) => {
     const returnedImage = photo.src.large;
     const gallery = `<img class="returnedImage" src="${returnedImage}" alt="${photo.altText}" tabindex="0  "/>`;
@@ -69,44 +78,60 @@ app.displayInfo = function (data) {
   });
 };
 
+// Adds sound element to page
 app.getSound = function () {
+  // Determines what happens when the select option changes
   $("select").on("change", function () {
+    // selects the ids of the children of the select (the options)
     const userId = $(this).children(":selected").attr("id");
-    for (let sound in app.soundObject) {
-      if (userId === sound) {
-        app.soundFile = app.soundObject[sound];
-        $(".audio").html(app.soundFile);
 
+    // loops through the sound object
+    for (let sound in app.soundObject) {
+      // checks if the id from the option matches the key of the sound object
+      if (userId === sound) {
+        // creates a variable with the matching audio element stored
+        app.soundFile = app.soundObject[sound];
+        // adds the audio element to the div with the class of audio
+        $audioDiv.html(app.soundFile);
+
+        // soundMuted is initially false so the soundfile plays when user first selects an option
         if (app.isSoundMuted === false) {
           app.soundFile.play();
         }
-
+        // sets audio volume
         $("audio").prop("volume", 0.1);
-        app.displaySoundButton();
+        // displays the sound icon on the screen below the select element
+        $soundToggle.addClass("soundOffVisible");
       }
     }
   });
-  $(".soundOff").on("click", function () {
+  // Toggles the sound off and on when user clicks the sound icon
+  $soundToggle.on("click", function () {
     if (app.isSoundMuted === false) {
-      $(".audio").html("");
+      $audioDiv.html("");
       app.isSoundMuted = true;
-      $(".soundOff").attr("src", "./styles/assets/soundOn.svg");
+      $soundToggle.attr("src", "./styles/assets/soundOn.svg");
     } else {
-      $(".audio").html(app.soundFile);
-      $(".soundOff").attr("src", "./styles/assets/soundOff.svg");
+      $audioDiv.html(app.soundFile);
+      $soundToggle.attr("src", "./styles/assets/soundOff.svg");
       app.soundFile.play();
       app.isSoundMuted = false;
     }
   });
-  $(".soundOff").on("keyup", function (e) {
+  // Toggles the sound off and on when user presses enter while tabbed onto the sound icon.
+  $soundToggle.on("keyup", function (e) {
     if (e.key === "Enter") {
       if (app.isSoundMuted === false) {
-        $(".audio").html("");
+        // removes the audio element from the page
+        $audioDiv.html("");
         app.isSoundMuted = true;
-        $(".soundOff").attr("src", "./styles/assets/soundOn.svg");
+        //toggles the sound icon appearance
+        $soundToggle.attr("src", "./styles/assets/soundOn.svg");
       } else {
-        $(".audio").html(app.soundFile);
-        $(".soundOff").attr("src", "./styles/assets/soundOff.svg");
+        // adds the audio element to the page
+        $audioDiv.html(app.soundFile);
+        // toggles the sound icon appearance
+        $soundToggle.attr("src", "./styles/assets/soundOff.svg");
         app.soundFile.play();
         app.isSoundMuted = false;
       }
@@ -114,18 +139,14 @@ app.getSound = function () {
   });
 };
 
-app.displaySoundButton = function () {
-  $(".soundOff").addClass("soundOffVisible");
-};
-
 // Start of the modal functionality
-// Adding class to modal so that it appears on the page
+// Adding open class to modal so that it appears on the page
 app.openModal = () => {
   $modal.addClass("open");
   $(window).on("keyup", app.handleKeyUp);
 };
 
-// Removing class on modal to remove from page
+// Removing open class on modal to remove from page
 app.closeModal = () => {
   $modal.removeClass("open");
 };
@@ -137,12 +158,12 @@ app.handleClickToClose = (e) => {
   }
 };
 
-// Allows users to hit escape to close the modal if not using a mouse
+// Allows user to hit escape to close the modal if not using a mouse
 app.handleKeyUp = (e) => {
   if (e.key === "Escape") return app.closeModal();
 };
 
-// Adds the image to the modal content box
+// Adds the image to the modal content box when a gallery image is clicked
 app.modalImage = () => {
   $(".returnedImage").on("click", function (e) {
     $(".modalContent").html(
@@ -151,7 +172,7 @@ app.modalImage = () => {
     );
     app.openModal();
   });
-  // Allows user to use enter to open the modal
+  // Allows user to press enter to open the modal
   $(".returnedImage").on("keyup", function (e) {
     if (e.key === "Enter") {
       $(".modalContent")
@@ -162,16 +183,17 @@ app.modalImage = () => {
   });
 };
 
-// Waiting for document to be ready to initialize
-// Start app
+// Initialize function
 app.init = function () {
-  app.getSound();
+  $audioDiv = $(".audio");
+  $soundToggle = $(".soundOff");
   $modal = $(".modal");
   app.getData();
+  app.getSound();
   $modal.on("click", app.handleClickToClose);
 };
 
-// Waiting for document to be ready to initialize
+// Document Ready function
 $(function () {
   app.init();
 });
