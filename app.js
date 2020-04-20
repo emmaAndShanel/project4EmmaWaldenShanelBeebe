@@ -21,6 +21,7 @@ app.soundObject.stream.loop = true;
 app.soundObject.waves = new Audio("styles/assets/sounds/waves.mp3");
 app.soundObject.waves.loop = true;
 
+app.isSoundMuted = false;
 // Collect user input and store in a variable
 app.getData = function () {
   $("select").on("change", (e) => {
@@ -72,25 +73,49 @@ app.getSound = function () {
   $("select").on("change", function () {
     const userId = $(this).children(":selected").attr("id");
     for (let sound in app.soundObject) {
-      const soundFile = app.soundObject[sound];
       if (userId === sound) {
-        $(".audio").html(soundFile);
-        const audio = $("audio");
-        audio[0].play();
+        app.soundFile = app.soundObject[sound];
+        $(".audio").html(app.soundFile);
+
+        if (app.isSoundMuted === false) {
+          app.soundFile.play();
+        }
+
         $("audio").prop("volume", 0.1);
-        $(".soundButton").html(`
-        <button><img tabindex="0" class="soundOff" src="./styles/assets/soundOff.svg" alt="speaker with an x to turn off sound"/></button>`);
-        $(".soundOff").on("click", function () {
-          audio[0].pause();
-        });
-        $(".soundOff").on("keyup", function (e) {
-          if (e.key === "Enter") {
-            audio[0].pause();
-          }
-        });
+        app.displaySoundButton();
       }
     }
   });
+  $(".soundOff").on("click", function () {
+    if (app.isSoundMuted === false) {
+      $(".audio").html("");
+      app.isSoundMuted = true;
+      $(".soundOff").attr("src", "./styles/assets/soundOn.svg");
+    } else {
+      $(".audio").html(app.soundFile);
+      $(".soundOff").attr("src", "./styles/assets/soundOff.svg");
+      app.soundFile.play();
+      app.isSoundMuted = false;
+    }
+  });
+  $(".soundOff").on("keyup", function (e) {
+    if (e.key === "Enter") {
+      if (app.isSoundMuted === false) {
+        $(".audio").html("");
+        app.isSoundMuted = true;
+        $(".soundOff").attr("src", "./styles/assets/soundOn.svg");
+      } else {
+        $(".audio").html(app.soundFile);
+        $(".soundOff").attr("src", "./styles/assets/soundOff.svg");
+        app.soundFile.play();
+        app.isSoundMuted = false;
+      }
+    }
+  });
+};
+
+app.displaySoundButton = function () {
+  $(".soundOff").addClass("soundOffVisible");
 };
 
 // Start of the modal functionality

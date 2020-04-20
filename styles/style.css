@@ -305,7 +305,16 @@ button {
 .soundOff {
   width: 30px;
   height: 30px;
-  color: #204120;
+  display: none;
+}
+
+.soundOn {
+  width: 30px;
+  height: 30px;
+}
+
+.soundOffVisible {
+  display: block;
 }
 
 .resultGallery {

@@ -15,7 +15,11 @@ button {
 .soundOff {
   width: 30px;
   height: 30px;
-  color: $darkMain;
+  display: none;
+}
+
+.soundOffVisible {
+  display: block;
 }
 
 .resultGallery {
