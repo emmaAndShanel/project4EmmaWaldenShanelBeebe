@@ -1,25 +1,24 @@
 const app = {};
 
+app.soundObject = {};
 
-app.soundObject = {}
-
-app.soundObject.autumn = new Audio("styles/assets/sounds/autumn.mp3")
+app.soundObject.autumn = new Audio("styles/assets/sounds/autumn.mp3");
 app.soundObject.autumn.loop = true;
-app.soundObject.blossoms = new Audio("styles/assets/sounds/blossoms.mp3")
+app.soundObject.blossoms = new Audio("styles/assets/sounds/blossoms.mp3");
 app.soundObject.blossoms.loop = true;
-app.soundObject.canyon = new Audio("styles/assets/sounds/canyon.mp3")
+app.soundObject.canyon = new Audio("styles/assets/sounds/canyon.mp3");
 app.soundObject.canyon.loop = true;
-app.soundObject.forest = new Audio("styles/assets/sounds/forest.mp3")
+app.soundObject.forest = new Audio("styles/assets/sounds/forest.mp3");
 app.soundObject.forest.loop = true;
-app.soundObject.lights = new Audio("styles/assets/sounds/lights.mp3")
+app.soundObject.lights = new Audio("styles/assets/sounds/lights.mp3");
 app.soundObject.lights.loop = true;
-app.soundObject.rainforest = new Audio("styles/assets/sounds/rainforest.mp3")
+app.soundObject.rainforest = new Audio("styles/assets/sounds/rainforest.mp3");
 app.soundObject.rainforest.loop = true;
-app.soundObject.sky = new Audio("styles/assets/sounds/sky.mp3")
+app.soundObject.sky = new Audio("styles/assets/sounds/sky.mp3");
 app.soundObject.sky.loop = true;
-app.soundObject.stream = new Audio("styles/assets/sounds/stream.mp3")
+app.soundObject.stream = new Audio("styles/assets/sounds/stream.mp3");
 app.soundObject.stream.loop = true;
-app.soundObject.waves = new Audio("styles/assets/sounds/waves.mp3")
+app.soundObject.waves = new Audio("styles/assets/sounds/waves.mp3");
 app.soundObject.waves.loop = true;
 
 // Collect user input and store in a variable
@@ -76,19 +75,23 @@ app.getSound = function () {
       const soundFile = app.soundObject[sound];
       if (userId === sound) {
         $(".audio").html(soundFile);
-        const audio = $("audio")
+        const audio = $("audio");
         audio[0].play();
-        $("audio").prop("volume", 0.1)
+        $("audio").prop("volume", 0.1);
         $(".soundButton").html(`
-        <button><img class="soundOff" src="./styles/assets/soundOff.svg"/></button>`)
+        <button><img tabindex="0" class="soundOff" src="./styles/assets/soundOff.svg" alt="speaker with an x to turn off sound"/></button>`);
         $(".soundOff").on("click", function () {
           audio[0].pause();
-        })
+        });
+        $(".soundOff").on("keyup", function (e) {
+          if (e.key === "Enter") {
+            audio[0].pause();
+          }
+        });
       }
     }
-  })
-}
-
+  });
+};
 
 // Start of the modal functionality
 // Adding class to modal so that it appears on the page
@@ -126,7 +129,8 @@ app.modalImage = () => {
   // Allows user to use enter to open the modal
   $(".returnedImage").on("keyup", function (e) {
     if (e.key === "Enter") {
-      $(".modalContent").html(`<img src="${e.currentTarget.src}" alt="${e.currentTarget.alt}"/>
+      $(".modalContent")
+        .html(`<img src="${e.currentTarget.src}" alt="${e.currentTarget.alt}"/>
       <span class="close"><img src="./styles/assets/close.svg"/></span>`);
       app.openModal();
     }
