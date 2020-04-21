@@ -27,7 +27,7 @@ app.soundObject.waves.loop = true;
 app.isSoundMuted = false;
 
 // Collect user input and store in a variable
-app.getData = function () {
+app.getData = () => {
   $("select").on("change", (e) => {
     const userSelection = e.currentTarget.value;
 
@@ -69,7 +69,7 @@ app.getData = function () {
 };
 
 // Displays data(images) on the page
-app.displayInfo = function (data) {
+app.displayInfo = (data) => {
   // Loops through the array of photos and returns image to be displayed on the page with alt text
   data.forEach((photo) => {
     const returnedImage = photo.src.large;
@@ -105,32 +105,16 @@ app.getSound = function () {
       }
     }
   });
-  // Toggles the sound off and on when user clicks the sound icon
-  $soundToggle.on("click", function () {
-    if (app.isSoundMuted === false) {
-      $audioDiv.html("");
-      app.isSoundMuted = true;
-      $soundToggle.attr("src", "./styles/assets/soundOn.svg");
-    } else {
-      $audioDiv.html(app.soundFile);
-      $soundToggle.attr("src", "./styles/assets/soundOff.svg");
-      app.soundFile.play();
-      app.isSoundMuted = false;
-    }
-  });
-  // Toggles the sound off and on when user presses enter while tabbing onto the sound icon.
-  $soundToggle.on("keyup", function (e) {
-    if (e.key === "Enter") {
+
+  // Toggles the sound off and on when user clicks on the sound icon or presses enter while tabbing onto the icon
+  $soundToggle.on("click keyup", (e) => {
+    if (e.key === "Enter" || e.handleObj.type === "click") {
       if (app.isSoundMuted === false) {
-        // removes the audio element from the page
         $audioDiv.html("");
         app.isSoundMuted = true;
-        //toggles the sound icon appearance
         $soundToggle.attr("src", "./styles/assets/soundOn.svg");
       } else {
-        // adds the audio element to the page
         $audioDiv.html(app.soundFile);
-        // toggles the sound icon appearance
         $soundToggle.attr("src", "./styles/assets/soundOff.svg");
         app.soundFile.play();
         app.isSoundMuted = false;
@@ -154,7 +138,7 @@ app.closeModal = () => {
 // Allows user to click on image to close the modal
 app.handleClickToClose = (e) => {
   if (e.target !== e.currentTarget) {
-    app.closeModal();
+   app.closeModal();
   }
 };
 
@@ -163,28 +147,21 @@ app.handleKeyUp = (e) => {
   if (e.key === "Escape") return app.closeModal();
 };
 
-// Adds the image to the modal content box when a gallery image is clicked
-app.modalImage = () => {
-  $(".returnedImage").on("click", function (e) {
-    $(".modalContent").html(
-      `<figure><img src="${e.currentTarget.src}" alt="${e.currentTarget.alt}"/>
+// Adds the image to the modal content box when a gallery image is clicked or user presses enter
+app.modalImage = () => {  
+$(".returnedImage").on("click keyup", (e) => {
+    if (e.key === "Enter" || e.handleObj.type === 'click') { 
+      $(".modalContent").html(
+        `<figure><img src="${e.currentTarget.src}" alt="${e.currentTarget.alt}"/>
         <span class="close"><img src="./styles/assets/close.svg"/></span></figure>`
-    );
-    app.openModal();
-  });
-  // Allows user to press enter to open the modal
-  $(".returnedImage").on("keyup", function (e) {
-    if (e.key === "Enter") {
-      $(".modalContent")
-        .html(`<img src="${e.currentTarget.src}" alt="${e.currentTarget.alt}"/>
-      <span class="close"><img src="./styles/assets/close.svg"/></span>`);
+      );
       app.openModal();
     }
-  });
+  } );
 };
 
 // Initialize function
-app.init = function () {
+app.init = () => {
   $audioDiv = $(".audio");
   $soundToggle = $(".soundOff");
   $modal = $(".modal");

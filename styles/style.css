@@ -308,11 +308,6 @@ button {
   display: none;
 }
 
-.soundOn {
-  width: 30px;
-  height: 30px;
-}
-
 .soundOffVisible {
   display: block;
 }
@@ -370,7 +365,8 @@ select {
   background-position: 95% center;
 }
 
-select:hover {
+select:hover,
+select:focus {
   background-color: #e8f0e8;
 }
 
@@ -400,17 +396,15 @@ select:hover {
   h1 {
     padding-top: 60px;
   }
+  span.close {
+    width: 25px;
+    height: 25px;
+  }
 }
 
 @media (max-width: 340px) {
   h1 {
     padding-top: 40px;
-  }
-}
-
-@media (max-height: 700px) {
-  .modalContent img {
-    max-height: 100%;
   }
 }
 
@@ -446,17 +440,21 @@ select:hover {
   display: grid;
   -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   color: black;
-  margin: 3rem;
+  max-width: 90%;
+  margin-bottom: 30px;
 }
 
 figure {
   position: relative;
-  overflow: scroll;
 }
 
 .modalContent img {
-  height: 100%;
+  max-height: 90vh;
+  height: auto;
   width: 100%;
   -o-object-fit: contain;
      object-fit: contain;
@@ -466,8 +464,8 @@ figure {
   position: absolute;
   top: 0;
   right: 0;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 
 .modal.open {

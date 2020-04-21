@@ -22,17 +22,19 @@
   height: calc(100vh - 100px);
   display: grid;
   grid-template-columns: 1fr;
+  align-items: center;
   color: black;
-  margin: 3rem;
+  max-width: 90%;
+  margin-bottom: 30px;
 }
 
 figure {
   position: relative;
-  overflow: scroll;
 }
 
 .modalContent img {
-  height: 100%;
+  max-height: 90vh;
+  height: auto;
   width: 100%;
   object-fit: contain;
 }
@@ -41,8 +43,8 @@ figure {
   position: absolute;
   top: 0;
   right: 0;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 
 .modal.open {

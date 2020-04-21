@@ -21,16 +21,15 @@
     h1 {
         padding-top: 60px;
     }
+
+    span.close {
+        width: 25px;
+        height: 25px;
+    }
 }
 
 @media (max-width: 340px) {
     h1 {
         padding-top: 40px;
-    }
-}
-
-@media (max-height: 700px) {
-    .modalContent img {
-        max-height: 100%;
     }
 }
