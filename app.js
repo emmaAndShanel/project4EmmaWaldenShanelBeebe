@@ -1,4 +1,4 @@
-//namspace object
+//namespace object
 const app = {};
 
 // object containing audio elements
@@ -68,12 +68,12 @@ app.getData = function () {
   });
 };
 
-// Display data(images) on the page
+// Displays data(images) on the page
 app.displayInfo = function (data) {
   // Loops through the array of photos and returns image to be displayed on the page with alt text
   data.forEach((photo) => {
     const returnedImage = photo.src.large;
-    const gallery = `<img class="returnedImage" src="${returnedImage}" alt="${photo.altText}" tabindex="0  "/>`;
+    const gallery = `<img class="returnedImage" src="${returnedImage}" alt="${photo.altText}" tabindex="0"/>`;
     $(".resultGallery").append(gallery);
   });
 };
@@ -118,7 +118,7 @@ app.getSound = function () {
       app.isSoundMuted = false;
     }
   });
-  // Toggles the sound off and on when user presses enter while tabbed onto the sound icon.
+  // Toggles the sound off and on when user presses enter while tabbing onto the sound icon.
   $soundToggle.on("keyup", function (e) {
     if (e.key === "Enter") {
       if (app.isSoundMuted === false) {
